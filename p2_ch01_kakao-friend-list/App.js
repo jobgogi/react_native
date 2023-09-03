@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import Header from './src/Header';
@@ -8,11 +9,12 @@ import FriendSection from './src/FriendSection';
 import { friendProfiles, myProfile } from './src/data';
 import FriendList from './src/FriendList';
 
-
 export default function App() {
+  const [isOpened, setIsOpened] = useState(true);
 
   const onPressArrow = () => {
     console.log('onPressArrow');
+    setIsOpened(!isOpened);
   };
 
   return (
@@ -32,9 +34,11 @@ export default function App() {
         <FriendSection
           friendProfileLen={friendProfiles.length}
           onPressArrow={onPressArrow}
+          isOpened={isOpened}
           />
         <FriendList
           data={friendProfiles}
+          isOpened={isOpened}
           />
       </SafeAreaView>
     </SafeAreaProvider>

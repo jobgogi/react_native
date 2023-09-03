@@ -11,7 +11,7 @@ const FriendSection = (props) => {
         onPress={props.onPressArrow}
         >
           <MaterialIcons
-            name="keyboard-arrow-down"
+            name={props.isOpened ? 'keyboard-arrow-down' : 'keyboard-arrow-up'}
             size={24}
             color="lightgrey"
             />

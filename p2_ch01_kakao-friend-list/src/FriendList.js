@@ -6,6 +6,8 @@ import Margin from './Margin';
 const bottomSpace = getBottomSpace();
 
 const FriendList = (props) => {
+  if (!props.isOpened) return null;
+
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
