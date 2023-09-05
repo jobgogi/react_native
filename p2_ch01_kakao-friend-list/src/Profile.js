@@ -1,5 +1,31 @@
 import { Image, Text, View } from "react-native";
 import Margin from "./Margin";
+import styled from 'styled-components/native';
+
+const Container = styled.View`
+  flex-direction: row;
+`;
+
+const ProfileImage = styled.Image`
+  width: ${(props) => props.size}px;
+  height: ${(props) => props.size}px;
+  border-radius: ${(props) => props.size * 0.4}px;
+`;
+
+const TextContainer = styled.View`
+  justify-content: center;
+  margin-left: 10px;
+`;
+
+const NameText = styled.Text`
+  font-weight: ${(props) => props.isMe ? 'bold' : 'normal'};
+  font-size: ${(props) => props.isMe ? 16 : 15}px;
+`;
+
+const IntroductionText = styled.Text`
+  font-size: ${(props) => props.isMe ? 12 : 11}px;
+  color: gray;
+`;
 
 const Profile = (props) => {
   const { uri, name, introduction, isMe } = props;
@@ -7,31 +33,24 @@ const Profile = (props) => {
   const size = isMe ? 50 : 40;
 
   return (
-    <View style={{ flexDirection: 'row' }}>
-      <Image
+    <Container>
+      <ProfileImage
         source={{ uri }}
-        style={{
-          width: size,
-          height: size,
-          borderRadius: size * 0.4,
-        }}
+        size={size}
         />
-      <View style={{ justifyContent: 'center', marginLeft: 10 }}>
-        <Text
-          style={{
-            fontWeight: isMe ? 'bold' : null,
-            fontSize: isMe ? 16 : 14,
-          }}>
+      <TextContainer>
+        <NameText
+          isMe={isMe}>
             {name}
-        </Text>
+        </NameText>
         {!!introduction && (
           <View>
             <Margin height={isMe ? 6 : 2} />
-            <Text style={{ fontSize: isMe ? 12 : 11, color: 'gray' }}>{introduction}</Text>
+            <IntroductionText>{introduction}</IntroductionText>
           </View>
         )}
-      </View>
-    </View>
+      </TextContainer>
+    </Container>
   );
 };
 
