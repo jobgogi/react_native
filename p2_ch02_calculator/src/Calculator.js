@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
 import styled from 'styled-components/native';
 
@@ -49,10 +49,27 @@ const ButtonContainer = styled.View`
   width: 100%;
 `;
 
+const InputContainer = styled.View`
+  background-color: ${COLOR.RESULT};
+  min-height: 50px;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 10px 5px;
+`;
+
 export default () => {
+  const [input, setInput] = useState(0); // 입력한 숫자
+  const [currentOperator, setCurrentOperator] = useState(null); // 계산 방식
+  const [result, setResult] = useState(null); // 결과값
+  const [tempInput, setTempInput] = useState(null); // 마지막에 입력한 숫자를 저장
+  const [tempOperator, setTempOperator] = useState(null); // 마지막 계산 방식을 저장
+
   return (
-    <View style={{ flex: 1, width: 250 }}>
+    <View style={{ flex: 1, width: 250, justifyContent: 'center' }}>
       {/* 결과 */}
+      <InputContainer>
+        <Text style={{ color: 'white', fontSize: 35, textAlign: 'right' }}>{input}</Text>
+      </InputContainer>
       {/* [AC ~ /] */}
       <ButtonContainer>
         <Button
