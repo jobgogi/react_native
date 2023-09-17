@@ -1,9 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { runPracticeDayjs } from './src/practice-dayjs';
+import { getCalendarColumns } from './src/util';
+import dayjs from 'dayjs';
+import { useEffect } from 'react';
 
 export default function App() {
-  runPracticeDayjs();
+  const now = dayjs();
+  const columns = getCalendarColumns(now);
+
+  useEffect(() => {
+    console.log('columns', columns);
+  }, []);
 
   return (
     <View style={styles.container}>
