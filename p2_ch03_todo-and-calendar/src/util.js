@@ -4,7 +4,7 @@ export const fillEmptyColumns = (columns, start, end) => {
   const filledColumns = columns.slice(0);
 
   const startDay = dayjs(start).get('day');
-  for (let i = 1; i <= startDay; i++) {
+  for (let i = 1; i < startDay; i++) {
     const date = dayjs(start).subtract(i, 'day');
     filledColumns.unshift(date);
   }
@@ -19,16 +19,13 @@ export const fillEmptyColumns = (columns, start, end) => {
 }
 
 export const getCalendarColumns = (now) => {
-  console.log('NOW >> ', now);
-  const start = dayjs(now).startOf('month');
+  // startOf를 할때마다 1일이 아닌 전달의 마지막 날을 가져온다
+  const start = dayjs(now).startOf('month').add(1, 'day');
   const end = dayjs(now).endOf('month');
   const endDate = dayjs(end).get('date');
 
-  console.log('START >> ', start);
-  console.log('END >> ', end);
-
   const columns = [];
-  for (let i = 0; i <= endDate; i++) {
+  for (let i = 0; i < endDate; i++) {
     const date = dayjs(start).add(i, 'day');
     columns.push(date);
   }
